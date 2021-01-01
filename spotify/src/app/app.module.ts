@@ -13,7 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ROUTES } from './app.routes';
 import { SpotifyService } from './services/spotify.service';
 import { NoimagePipe } from './pipes/noimage.pipe';
-import { TarjetasComponent } from './components/shared/tarjetas/tarjetas.component';
+import { DomseguroPipe } from './pipes/domseguro.pipe';
+import { TarjetasComponent } from './components/tarjetas/tarjetas.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
 
 @NgModule({
@@ -24,6 +25,7 @@ import { LoadingComponent } from './components/shared/loading/loading.component'
     ArtistaComponent,
     NavbarComponent,
     NoimagePipe,
+    DomseguroPipe,
     TarjetasComponent,
     LoadingComponent
   ],

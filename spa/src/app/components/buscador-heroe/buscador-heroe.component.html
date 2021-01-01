@@ -1,0 +1,6 @@
+<h1>Héroes <small>Marvel y DC</small></h1>
+
+<div class="row animated fadeIn fast" *ngIf="heroes.length==0">
+
+</div>
+<app-heroe-tarjeta *ngFor="let foo of heroes" [heroe]="foo"></app-heroe-tarjeta>
