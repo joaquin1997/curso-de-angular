@@ -22,33 +22,37 @@ export class Tab1Page {
   async agregarLista() {
     //this.router.navigate(["/tabs/tab1/agregar"]);
     const alert = await this.alertCtlr.create({
-      header: 'Nueva lista',
-      buttons: [{
-        text: 'Cancelar',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancelar');
-        }
-      },
-      {
-        text: 'Crear',
-        handler: ( data ) => {
-          console.log(data);
-          if( data.titulo.length === 0){
-            return ;
-          }else{
-            this.deseosService.crearLista(data.titulo);
-          }
-        }
-      }
-    ],
+      header: "Nueva lista",
+      buttons: [
+        {
+          text: "Cancelar",
+          role: "cancel",
+          handler: () => {
+            console.log("Cancelar");
+          },
+        },
+        {
+          text: "Crear",
+          handler: (data) => {
+            console.log(data);
+            if (data.titulo.length === 0) {
+              return;
+            } else {
+              const listaId = this.deseosService.crearLista(data.titulo);   
+              this.router.navigateByUrl(`/tabs/tab1/agregar/${listaId}`);
+            }
+          },
+        },
+      ],
       inputs: [
         {
-          name: 'titulo',
-          type: 'text',
-          placeholder: 'Nombre de la lista'
-        }]
-      });
+          name: "titulo",
+          type: "text",
+          placeholder: "Nombre de la lista",
+        },
+      ],
+    });
     alert.present();
-    }
+  }
+
 }

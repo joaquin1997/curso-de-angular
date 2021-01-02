@@ -1,36 +1,44 @@
-import { Injectable } from '@angular/core';
-import { Lista } from '../models/Lista.model';
+import { Injectable } from "@angular/core";
+import { Lista } from "../models/Lista.model";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class DeseosService {
+  listas: Lista[] = [];
 
-  listas: Lista[]=[];
-  
-  constructor() { 
+  constructor() {
     this.cargarStorage();
   }
 
-  public getLista(): Lista[]{
+  public getLista(): Lista[] {
     return this.listas;
   }
 
-  public crearLista(titulo: string){
+  public getListas(completada: boolean): Lista[] {
+    console.log(completada);
+    return this.listas.filter((lista) => lista.terminada===completada
+    );
+  }
+
+  public crearLista(titulo: string): number {
     const nuevaLista = new Lista(titulo);
     this.listas.push(nuevaLista);
-
     this.guardarStorage();
+    return nuevaLista.id;
   }
 
-  guardarStorage(){
-    
-    localStorage.setItem('listaData', JSON.stringify(this.listas));
-
+  public cargarLista(id: string | number): Lista {
+    id = Number(id);
+    return this.listas.find((listas) => listas.id === id);
   }
 
-  cargarStorage(){
-    if(localStorage.getItem('listaData'))
-    this.listas=JSON.parse(localStorage.getItem('listaData'));
+  guardarStorage() {
+    localStorage.setItem("listaData", JSON.stringify(this.listas));
+  }
+
+  cargarStorage() {
+    if (localStorage.getItem("listaData"))
+      this.listas = JSON.parse(localStorage.getItem("listaData"));
   }
 }
