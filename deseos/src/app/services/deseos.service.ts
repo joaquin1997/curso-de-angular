@@ -5,6 +5,7 @@ import { Lista } from "../models/Lista.model";
   providedIn: "root",
 })
 export class DeseosService {
+
   listas: Lista[] = [];
 
   constructor() {
@@ -40,5 +41,19 @@ export class DeseosService {
   cargarStorage() {
     if (localStorage.getItem("listaData"))
       this.listas = JSON.parse(localStorage.getItem("listaData"));
+  }
+  
+  borrarLista(lista: Lista) {
+    this.listas=this.listas.filter((list)=> list.id!=lista.id);
+    this.guardarStorage();
+  }
+
+  editarTitulo(id:number,titulo:string){
+    this.listas.forEach((lista)=>{
+      if(lista.id==id){
+        lista.titulo=titulo;
+      }
+    })
+    this.guardarStorage();
   }
 }
