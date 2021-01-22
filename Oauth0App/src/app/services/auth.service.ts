@@ -11,11 +11,14 @@ import { Router } from '@angular/router';
 }) 
 export class AuthService {
   // Create an observable of Auth0 instance of client
+  domain: string = "dev-o4rhzrca.eu.auth0.com"
+  client_id: string = "bfu1zS9LH1AX54s2Ex32qDSbKm2R9390"
+  redirect_uri: string = `${window.location.origin}/callback`
   auth0Client$ = (from(
     createAuth0Client({
-      domain: "strider.auth0.com",
-      client_id: "JaeWH01OBrXsxHSFBY4wdAz6Rj9cthOZ",
-      redirect_uri: `${window.location.origin}/callback`
+      domain: this.domain,
+      client_id: this.client_id,
+      redirect_uri: this.redirect_uri
     })
   ) as Observable<Auth0Client>).pipe(
     shareReplay(1), // Every subscription receives the same shared value
@@ -77,7 +80,7 @@ export class AuthService {
     this.auth0Client$.subscribe((client: Auth0Client) => {
       // Call method to log in
       client.loginWithRedirect({
-        redirect_uri: `${window.location.origin}/callback`,
+        redirect_uri: this.redirect_uri,
         appState: { target: redirectPath }
       });
     });
@@ -114,7 +117,7 @@ export class AuthService {
     this.auth0Client$.subscribe((client: Auth0Client) => {
       // Call method to log out
       client.logout({
-        client_id: "JaeWH01OBrXsxHSFBY4wdAz6Rj9cthOZ",
+        client_id: "bfu1zS9LH1AX54s2Ex32qDSbKm2R9390",
         returnTo: `${window.location.origin}`
       });
     });

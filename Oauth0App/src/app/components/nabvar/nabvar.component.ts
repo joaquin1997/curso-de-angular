@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-nabvar',
@@ -8,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NabvarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public auth: AuthService) { }
 
   ngOnInit(): void {
   }
+
+  
 
 }
